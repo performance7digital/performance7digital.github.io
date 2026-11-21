@@ -24,6 +24,16 @@ Subí el contenido de esta carpeta (incluidos `index.html` y `assets/`) a la ra�
 4. Actualizá el contador de proyectos del encabezado.
 5. Si creás una imagen móvil específica, añadí un `<source media="(max-width: 640px)" ...>` al elemento `<picture>`.
 
-Las vistas previas de los proyectos 3–6 se recortaron a partir de las capturas proporcionadas. Las imágenes 1–2 utilizan exactamente los recortes de escritorio y móvil que fueron compartidos, convertidos a WebP para reducir el peso.
+Las vistas previas de los proyectos originales 3–6 se recortaron a partir de las capturas proporcionadas. Las imágenes 1–2 utilizan exactamente los recortes de escritorio y móvil que fueron compartidos, convertidos a WebP para reducir el peso.
 
 El botón de tema comienza en oscuro y permite alternar a claro; el navegador guarda la preferencia cuando lo permite. El desvanecimiento en los bordes usa `mask-image`, sin modificar los archivos originales.
+
+## Versión 2 — 21/11/2026
+
+Se incorporaron cinco proyectos: Gastronomia - Menu Pizzeria; Servicios Para Ortopedia; Instagram - Dr. Ehrlichs; Amazon - Dr. Erlrichs; Mercado Libre - Dr. Erlrichs. En total se muestran **11 proyectos**.
+
+Por indicación expresa, **Gastronomia - Menu Pizzeria** aparece inmediatamente después de **Gastronomia**, en tercera posición. Los proyectos anteriores conservan su orden relativo.
+
+Las cinco capturas nuevas se prepararon a partir de las fotografías proporcionadas, excluyendo la interfaz del navegador y la barra de tareas. Se entregan en WebP como vistas previas de escritorio. Para ellas no se proporcionaron capturas específicas para móviles, por lo que el diseño responsive muestra la misma imagen con recorte adaptable y desvanecimiento CSS. No se añadieron imágenes móviles inventadas.
+
+Los enlaces se conservaron tal como fueron proporcionados, incluidos los segmentos `dr-erlrichs` y `dr-elrlichs` en las distintas rutas.
