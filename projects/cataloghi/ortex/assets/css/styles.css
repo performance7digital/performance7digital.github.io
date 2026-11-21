@@ -1,0 +1,1329 @@
+/* =========================================================
+   ORTEX Zlín - Hoja de estilos principal
+   ---------------------------------------------------------
+   Estrategia: MOBILE FIRST
+
+   Este archivo está pensado para que el diseño base funcione
+   correctamente en celulares. A partir de esa base, el layout
+   crece progresivamente con media queries de tipo min-width.
+
+   Criterio de organización:
+   1. Variables globales y normalización básica.
+   2. Header y navegación.
+   3. Hero principal.
+   4. Bloque de valor.
+   5. Sección institucional / empresa.
+   6. Sección equipo.
+   7. Footer profesional y contacto.
+   8. Escalado responsive con min-width.
+
+   Nota de mantenimiento:
+   - No se parte de escritorio para luego corregir móviles.
+   - El estado base debe verse bien en pantallas pequeñas.
+   - Los breakpoints agregan complejidad solo cuando hay espacio.
+   - Las clases HTML existentes se conservan para permitir reemplazar
+     únicamente este CSS sin modificar el documento.
+   ========================================================= */
+
+
+/* =========================================================
+   1. VARIABLES Y BASE GLOBAL
+   ---------------------------------------------------------
+   Variables reutilizables para color, espaciado, sombras,
+   radios y anchos máximos. La inclusión de variables de
+   layout permite ajustar la escala del sitio con menos riesgo.
+   ========================================================= */
+
+:root {
+  --m: #71133b;
+  --d: #260715;
+  --bg: #fbf8fa;
+  --ink: #221e24;
+  --muted: #6d6670;
+  --line: rgba(113, 19, 59, 0.18);
+  --shadow: 0 18px 46px rgba(35, 7, 20, 0.14);
+  --shadow-strong: 0 24px 70px rgba(35, 7, 20, 0.2);
+  --pink: #ff3b8b;
+
+  --container: min(100% - 28px, 1320px);
+  --section-container: min(100% - 28px, 1180px);
+  --footer-container: min(100% - 28px, 1400px);
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   2. HEADER Y NAVEGACIÓN PRINCIPAL
+   ---------------------------------------------------------
+   Base móvil:
+   - Header compacto.
+   - Tagline oculta para no comprimir el espacio.
+   - Menú hamburguesa visible.
+   - Navegación desplegable controlada por .nav.open desde JS.
+   ========================================================= */
+
+.site-top {
+  background: linear-gradient(135deg, var(--d), var(--m));
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(38, 7, 21, 0.2);
+}
+
+.nav-wrap {
+  width: var(--container);
+  min-height: 74px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  flex: 0 0 auto;
+}
+
+.logo-text strong {
+  display: block;
+  font-size: clamp(1.5rem, 7vw, 1.75rem);
+  line-height: 1;
+}
+
+.tagline {
+  display: none;
+}
+
+.menu-btn {
+  display: block;
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-btn span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: white;
+  margin: 6px 0;
+}
+
+.nav {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: white;
+  color: var(--ink);
+  padding: 18px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-strong);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  z-index: 99;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.nav.open {
+  display: flex;
+}
+
+.nav a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  opacity: 0.96;
+}
+
+.nav a:hover {
+  background: rgba(113, 19, 59, 0.08);
+  color: var(--m);
+}
+
+.catalog-btn {
+  border: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   3. HERO PRINCIPAL
+   ---------------------------------------------------------
+   Base móvil:
+   - Una sola columna.
+   - Texto legible sin títulos desproporcionados.
+   - Imagen contenida para no competir con el mensaje.
+   - Efectos decorativos reducidos para evitar saturación visual.
+   ========================================================= */
+
+.hero {
+  background: linear-gradient(135deg, var(--d), var(--m));
+  color: white;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+  padding-inline: 14px;
+}
+
+.hero-home {
+  min-height: auto;
+  padding-top: 44px;
+  padding-bottom: 44px;
+}
+
+.hero-copy,
+.hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy {
+  width: min(100%, 620px);
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0 0 14px;
+  color: #ffd8e8;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: clamp(0.72rem, 2.8vw, 0.82rem);
+}
+
+.kicker.dark {
+  color: var(--m);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 10vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.hero p:not(.kicker) {
+  max-width: 620px;
+  margin-top: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 3.8vw, 1.08rem);
+}
+
+.accent-line {
+  width: 70px;
+  height: 4px;
+  background: #d65b91;
+  margin: 20px 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: 50%;
+  top: 76%;
+  transform: translate(50%, -50%);
+  background:
+    radial-gradient(
+      circle,
+      rgba(214, 91, 145, 0.34) 0%,
+      rgba(214, 91, 145, 0.2) 34%,
+      transparent 70%
+    );
+  border-radius: 50%;
+  filter: blur(12px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 360px;
+  right: 50%;
+  top: 80%;
+  transform: translate(50%, -50%);
+  background:
+    radial-gradient(
+      circle at 34% 42%,
+      transparent 0 36%,
+      rgba(210, 118, 160, 0.2) 37% 38%,
+      transparent 39%
+    ),
+    radial-gradient(
+      circle at 62% 58%,
+      transparent 0 39%,
+      rgba(210, 118, 160, 0.16) 40% 41%,
+      transparent 42%
+    );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+}
+
+.hero-visual img {
+  position: relative;
+  z-index: 2;
+  width: min(78vw, 340px);
+  max-height: 330px;
+  object-fit: contain;
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 28px 28px rgba(0, 0, 0, 0.34));
+}
+
+
+/* =========================================================
+   4. BLOQUE DE VALOR
+   ---------------------------------------------------------
+   Base móvil:
+   - Beneficios apilados.
+   - Separadores horizontales.
+   - Espaciado suficiente para lectura táctil y visual.
+   ========================================================= */
+
+.value-strip {
+  background: white;
+  width: 100%;
+  padding: 28px 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.value-strip article {
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.value-strip article:last-child {
+  border-bottom: 0;
+}
+
+.value-strip span {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--m);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--m);
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.value-strip h2 {
+  font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+  color: var(--m);
+  margin: 0 0 5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.value-strip p {
+  margin: 0;
+  color: #494249;
+}
+
+
+/* =========================================================
+   5. SECCIÓN EMPRESA
+   ---------------------------------------------------------
+   Base móvil:
+   - Una sola columna.
+   - Títulos moderados.
+   - Imagen y badge con tamaños controlados.
+   ========================================================= */
+
+.section {
+  width: var(--section-container);
+  margin: auto;
+  padding: 64px 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.section h2 {
+  font-size: clamp(2rem, 9vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin: 0 0 18px;
+}
+
+.section p {
+  color: var(--muted);
+  font-size: clamp(1rem, 3.6vw, 1.06rem);
+}
+
+.company-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.company-card img {
+  width: 100%;
+  min-height: 240px;
+  object-fit: cover;
+}
+
+.years {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  background: white;
+  color: var(--m);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.years strong {
+  font-size: clamp(2rem, 10vw, 3rem);
+  display: block;
+  line-height: 1;
+}
+
+.years span {
+  font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   6. SECCIÓN EQUIPO
+   ---------------------------------------------------------
+   Base móvil:
+   - Contenido apilado.
+   - Imagen centrada.
+   - Características en una columna sin separadores verticales.
+   ========================================================= */
+
+.team-showcase {
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(167, 34, 94, 0.35),
+      transparent 50%
+    ),
+    linear-gradient(135deg, #510026, #6d0537, #7a0c42);
+  padding: 68px 0;
+  overflow: hidden;
+}
+
+.team-showcase__inner {
+  width: min(100% - 28px, 1400px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "content"
+    "image"
+    "features";
+  gap: 34px;
+  align-items: center;
+}
+
+.team-showcase__eyebrow {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 16px;
+}
+
+.team-showcase__content {
+  grid-area: content;
+}
+
+.team-showcase__content h2 {
+  color: white;
+  font-size: clamp(2rem, 9.5vw, 3.2rem);
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: -0.04em;
+}
+
+.team-showcase__image {
+  grid-area: image;
+  position: relative;
+  justify-self: center;
+  width: min(100%, 460px);
+}
+
+.team-showcase__image::before {
+  content: "";
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08),
+      transparent 70%
+    );
+  z-index: 0;
+}
+
+.team-showcase__image img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: block;
+  border-radius: 22px;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+}
+
+.team-showcase__features,
+.team-showcase__features--row {
+  grid-area: features;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  width: 100%;
+  margin-top: 0;
+}
+
+.team-showcase__features--row > div {
+  padding: 0;
+  border-right: 0;
+}
+
+.team-showcase__features h3,
+.team-showcase__features--row h3 {
+  color: white;
+  font-size: clamp(1.1rem, 4.8vw, 1.25rem);
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.team-showcase__features p,
+.team-showcase__features--row p {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   7. FOOTER PROFESIONAL Y CONTACTO
+   ---------------------------------------------------------
+   Base móvil:
+   - Todo apilado.
+   - CTA legible y no comprimido.
+   - Tarjetas, columnas y legales en una sola columna.
+   ========================================================= */
+
+.pro-footer {
+  background:
+    radial-gradient(
+      circle at 80% 22%,
+      rgba(255, 59, 139, 0.16),
+      transparent 34%
+    ),
+    linear-gradient(180deg, #19151a 0%, #101016 52%, #0b0b10 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.pro-footer__cta {
+  width: min(100% - 28px, 1500px);
+  margin: 28px auto;
+  min-height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(30, 7, 18, 0.95) 0%,
+      rgba(83, 11, 43, 0.84) 58%,
+      rgba(83, 11, 43, 0.68) 100%
+    ),
+    url("../img/footer-building-bg.png") center right / cover no-repeat;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  padding: 28px;
+  align-items: start;
+}
+
+.pro-footer__cta-copy {
+  max-width: 620px;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: var(--pink);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.pro-footer__cta h2 {
+  margin: 0 0 18px;
+  max-width: 620px;
+  font-size: clamp(2rem, 9.5vw, 3.1rem);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.pro-footer__cta p {
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 3.8vw, 1.08rem);
+  max-width: 620px;
+}
+
+.pro-footer__highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: 15px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c2185b, #e91e63);
+  color: #ffffff;
+  font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: 0 14px 28px rgba(194, 24, 91, 0.35);
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+
+.pro-footer__contact-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.pro-footer-card {
+  min-height: auto;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+}
+
+.pro-footer-card__icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  display: grid;
+  place-items: center;
+  color: var(--pink);
+}
+
+.pro-footer-card__icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.1;
+}
+
+.pro-footer-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+}
+
+.pro-footer-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.98rem;
+}
+
+.pro-footer__main {
+  width: var(--footer-container);
+  margin: 0 auto;
+  padding: 34px 0 28px;
+}
+
+.pro-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.pro-footer__brand h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.9rem, 8vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.pro-footer__brand p {
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 18px;
+  max-width: 520px;
+}
+
+.pro-footer__badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.badge-img {
+  width: 82px;
+  height: auto;
+}
+
+.pro-footer__col h3,
+.pro-footer__map h3 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.pro-footer__map h3 {
+  color: var(--pink);
+}
+
+.pro-footer__col a {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 11px;
+  transition: 0.2s ease;
+}
+
+.pro-footer__col a:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.pro-footer__map img {
+  width: 100%;
+  border-radius: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32);
+}
+
+.pro-footer__social {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 32px 0 24px;
+  padding: 24px 0;
+}
+
+.pro-footer__social h3 {
+  margin: 0 0 18px;
+  color: var(--pink);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.social-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.social-link img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  object-fit: contain;
+}
+
+.pro-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.9rem;
+}
+
+.pro-footer__bottom p {
+  margin: 0;
+}
+
+.pro-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.language {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  padding: 9px 14px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* =========================================================
+   8. ESCALADO RESPONSIVE - MOBILE FIRST
+   ---------------------------------------------------------
+   A partir de aquí el sitio crece progresivamente.
+   Se usan min-width para agregar columnas, ampliar imágenes,
+   aumentar separación y escalar tipografía solo cuando el ancho
+   disponible lo permite.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   480px en adelante: celulares grandes.
+   Mejora respiración horizontal y permite imágenes algo mayores.
+   --------------------------------------------------------- */
+@media (min-width: 480px) {
+  :root {
+    --container: min(100% - 36px, 1320px);
+    --section-container: min(100% - 36px, 1180px);
+    --footer-container: min(100% - 36px, 1400px);
+  }
+
+  .hero {
+    padding-inline: 18px;
+  }
+
+  .hero-visual img {
+    width: min(72vw, 420px);
+    max-height: 400px;
+  }
+
+  .value-strip {
+    padding-inline: 18px;
+  }
+
+  .pro-footer__cta {
+    width: min(100% - 36px, 1500px);
+    padding: 34px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   640px en adelante: móviles horizontales y tablets pequeñas.
+   Se habilitan grillas de dos columnas donde el contenido ya no
+   queda comprimido.
+   --------------------------------------------------------- */
+@media (min-width: 640px) {
+  .nav-wrap {
+    min-height: 82px;
+  }
+
+  .hero-home {
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.75rem, 7.5vw, 4rem);
+  }
+
+  .hero-visual {
+    min-height: 330px;
+  }
+
+  .hero-visual img {
+    width: min(66vw, 500px);
+    max-height: 480px;
+  }
+
+  .value-strip {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 34px max(24px, calc((100vw - 1320px) / 2));
+  }
+
+  .value-strip article {
+    padding: 22px 26px;
+  }
+
+  .value-strip article:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+
+  .value-strip article:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .team-showcase__features--row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 0;
+  }
+
+  .team-showcase__features--row > div {
+    padding: 0 28px;
+  }
+
+  .team-showcase__features--row > div:nth-child(odd) {
+    padding-left: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .team-showcase__features--row > div:nth-child(even) {
+    padding-right: 0;
+  }
+
+  .pro-footer__contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pro-footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pro-footer__brand,
+  .pro-footer__map {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   768px en adelante: tablets.
+   Se incrementan tamaños de sección y se mejora la relación
+   texto/imagen sin pasar todavía al layout desktop completo.
+   --------------------------------------------------------- */
+@media (min-width: 768px) {
+  :root {
+    --container: min(100% - 48px, 1320px);
+    --section-container: min(100% - 48px, 1180px);
+    --footer-container: min(100% - 48px, 1400px);
+  }
+
+  .nav-wrap {
+    min-height: 88px;
+  }
+
+  .hero {
+    padding-inline: 24px;
+  }
+
+  .hero-home {
+    padding-top: 68px;
+    padding-bottom: 68px;
+  }
+
+  .hero-copy {
+    width: min(100%, 700px);
+  }
+
+  .hero p:not(.kicker) {
+    font-size: 1.12rem;
+  }
+
+  .section {
+    padding: 82px 0;
+  }
+
+  .split {
+    gap: 46px;
+  }
+
+  .team-showcase {
+    padding: 84px 0;
+  }
+
+  .team-showcase__inner {
+    width: min(100% - 48px, 1400px);
+    gap: 44px;
+  }
+
+  .team-showcase__content h2,
+  .pro-footer__cta h2 {
+    font-size: clamp(3rem, 6.8vw, 4.4rem);
+  }
+
+  .pro-footer__cta {
+    width: min(100% - 48px, 1500px);
+    padding: 42px;
+  }
+
+  .pro-footer__contact-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pro-footer-card {
+    padding: 26px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   1024px en adelante: escritorio.
+   Se activa la navegación horizontal, el hero pasa a dos columnas
+   y las secciones principales recuperan la composición amplia.
+   --------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .nav-wrap {
+    min-height: 96px;
+    gap: 28px;
+  }
+
+  .menu-btn {
+    display: none;
+  }
+
+  .tagline {
+    display: block;
+    border-left: 1px solid rgba(255, 255, 255, 0.32);
+    padding-left: 28px;
+    font-size: 14px;
+    line-height: 1.45;
+    min-width: 230px;
+  }
+
+  .tagline strong,
+  .tagline span {
+    display: block;
+  }
+
+  .nav {
+    margin-left: auto;
+    display: flex;
+    position: static;
+    background: transparent;
+    color: white;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .nav a {
+    padding: 0;
+  }
+
+  .nav a:hover {
+    background: transparent;
+    color: #ffd8e8;
+  }
+
+  .catalog-btn {
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 12px;
+    padding: 12px 18px !important;
+  }
+
+  .hero {
+    grid-template-columns:
+      minmax(24px, 1fr)
+      minmax(0, 620px)
+      minmax(0, 700px)
+      minmax(24px, 1fr);
+    align-items: center;
+    gap: 34px;
+    padding-inline: 0;
+  }
+
+  .hero-home {
+    min-height: 690px;
+    padding-top: 52px;
+    padding-bottom: 78px;
+  }
+
+  .hero-copy {
+    grid-column: 2;
+    width: auto;
+    margin: 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.75rem, 5.4vw, 5.125rem);
+    line-height: 1.02;
+    letter-spacing: -0.06em;
+  }
+
+  .hero p:not(.kicker) {
+    font-size: 1.125rem;
+  }
+
+  .hero::before {
+    width: 900px;
+    height: 900px;
+    right: 11%;
+    top: 54%;
+    transform: translateY(-50%);
+  }
+
+  .hero::after {
+    width: 1250px;
+    height: 900px;
+    right: -260px;
+    top: 54%;
+    transform: translateY(-50%);
+    background:
+      radial-gradient(
+        circle at 34% 42%,
+        transparent 0 36%,
+        rgba(210, 118, 160, 0.25) 37% 38%,
+        transparent 39%
+      ),
+      radial-gradient(
+        circle at 62% 58%,
+        transparent 0 39%,
+        rgba(210, 118, 160, 0.22) 40% 41%,
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 48% 82%,
+        transparent 0 34%,
+        rgba(210, 118, 160, 0.16) 35% 36%,
+        transparent 37%
+      );
+  }
+
+  .hero-visual {
+    grid-column: 3;
+    justify-content: flex-end;
+    min-height: 620px;
+  }
+
+  .hero-visual img {
+    width: min(680px, 44vw);
+    max-height: 680px;
+    transform: rotate(-2deg) translateX(20px);
+    filter: drop-shadow(0 42px 45px rgba(0, 0, 0, 0.42));
+  }
+
+  .value-strip {
+    grid-template-columns: repeat(4, 1fr);
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  .value-strip article {
+    padding: 14px 34px;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .value-strip article:last-child {
+    border-right: 0;
+  }
+
+  .section {
+    padding: 92px 0;
+  }
+
+  .split {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+  }
+
+  .team-showcase {
+    padding: 110px 0;
+  }
+
+  .team-showcase__inner {
+    width: min(100% - 80px, 1400px);
+    grid-template-columns: 1fr 520px;
+    grid-template-areas:
+      "content image"
+      "features features";
+    column-gap: 90px;
+    row-gap: 50px;
+  }
+
+  .team-showcase__content h2 {
+    font-size: clamp(3.5rem, 4vw, 4.5rem);
+    margin-bottom: 50px;
+  }
+
+  .team-showcase__image {
+    width: 520px;
+  }
+
+  .team-showcase__features--row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .team-showcase__features--row > div,
+  .team-showcase__features--row > div:nth-child(odd),
+  .team-showcase__features--row > div:nth-child(even) {
+    padding: 0 36px;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .team-showcase__features--row > div:first-child {
+    padding-left: 0;
+  }
+
+  .team-showcase__features--row > div:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .pro-footer__cta {
+    gap: 44px;
+    padding: 52px;
+  }
+
+  .pro-footer__cta h2 {
+    font-size: clamp(3.25rem, 4.5vw, 4.125rem);
+  }
+
+  .pro-footer__grid {
+    grid-template-columns: 1.1fr 0.7fr 0.8fr 0.8fr;
+    gap: 42px;
+  }
+
+  .pro-footer__brand,
+  .pro-footer__map {
+    grid-column: auto;
+  }
+
+  .pro-footer__map {
+    grid-column: 1 / -1;
+  }
+
+  .pro-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   1200px en adelante: escritorio amplio.
+   El footer recupera su estructura de cinco columnas y el CTA
+   superior vuelve a dos columnas balanceadas.
+   --------------------------------------------------------- */
+@media (min-width: 1200px) {
+  .pro-footer__cta {
+    grid-template-columns: 0.9fr 1.25fr;
+    min-height: 390px;
+  }
+
+  .pro-footer__grid {
+    grid-template-columns: 1.15fr 0.55fr 0.65fr 0.65fr 1.35fr;
+    gap: 48px;
+  }
+
+  .pro-footer__map {
+    grid-column: auto;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   1400px en adelante: monitores grandes.
+   Ajusta la posición del producto y los efectos del hero para que
+   no se desplacen demasiado hacia el borde derecho.
+   --------------------------------------------------------- */
+@media (min-width: 1400px) {
+  .hero::before {
+    right: 12%;
+  }
+
+  .hero::after {
+    right: 8%;
+  }
+
+  .hero-visual img {
+    width: min(720px, 42vw);
+    transform: rotate(-2deg) translateX(-10px);
+  }
+}
