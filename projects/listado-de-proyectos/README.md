@@ -37,3 +37,9 @@ Por indicación expresa, **Gastronomia - Menu Pizzeria** aparece inmediatamente 
 Las cinco capturas nuevas se prepararon a partir de las fotografías proporcionadas, excluyendo la interfaz del navegador y la barra de tareas. Se entregan en WebP como vistas previas de escritorio. Para ellas no se proporcionaron capturas específicas para móviles, por lo que el diseño responsive muestra la misma imagen con recorte adaptable y desvanecimiento CSS. No se añadieron imágenes móviles inventadas.
 
 Los enlaces se conservaron tal como fueron proporcionados, incluidos los segmentos `dr-erlrichs` y `dr-elrlichs` en las distintas rutas.
+
+## Versión 3 — 22/11/2026
+
+Se agregó **Performance 7 Digital - Elegante** como segundo proyecto, inmediatamente después de **Performance 7 Digital - Página Principal** y antes de **Gastronomia**.
+
+Se utilizaron dos recortes de la captura entregada para vistas previas de escritorio y móvil, optimizados en WebP. Se mantuvo el orden relativo, los enlaces, las capturas y las descripciones de los once proyectos anteriores. El contador pasa a **12 proyectos**.
