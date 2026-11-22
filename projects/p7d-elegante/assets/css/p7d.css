@@ -1,0 +1,247 @@
+/*
+ * Performance 7 Digital — estilos propios de navegación.
+ * Se carga después de main.css para conservar intactos los estilos
+ * de la plantilla Eventually (HTML5 UP).
+ */
+
+/* Se mantiene la separación original del subtítulo en páginas secundarias. */
+#header > p {
+  margin-bottom: 1.3em;
+}
+
+/* Página principal: jerarquía tipográfica y flujo vertical sin superposiciones.
+ * Se mantienen las animaciones y la selección de imágenes originales.
+ * Las dimensiones se definen en em/rem para respetar el zoom del navegador.
+ */
+body.p7d-home {
+  height: auto;
+  min-height: 100vh;
+  justify-content: flex-start;
+}
+
+/* Crece cuando sobra espacio; cuando no sobra, el documento puede desplazarse. */
+.p7d-home #header {
+  flex: 0 0 auto;
+  margin-top: auto;
+  max-width: 100%;
+}
+
+.p7d-home #header h1 {
+  margin-bottom: 0.45em;
+}
+
+/* Jerarquía: mensaje principal 1.65em; resto de la presentación 1.35em. */
+.p7d-home #header .presentation {
+  font-size: 1.35em;
+  line-height: 1.42;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 28em;
+}
+
+.p7d-home #header .presentation p,
+.p7d-home #header .presentation ul,
+.p7d-home #header .presentation li {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* El primer renglón destaca sin competir con el H1. */
+.p7d-home #header .presentation > p:first-child {
+  font-size: 1.222222em;
+}
+
+.p7d-home #header .presentation p {
+  margin: 0;
+}
+
+.p7d-home #header .presentation p + p {
+  margin-top: 0.35em;
+}
+
+.p7d-home #header .presentation ul {
+  list-style: disc;
+  padding-left: 1.7em;
+  margin: 0.25em 0 0.25em 0;
+}
+
+.p7d-home #header .presentation li {
+  padding-left: 0.06em;
+}
+
+.p7d-home .service-links {
+  margin-top: 1.4em;
+}
+
+/* El pie participa del flujo normal: nunca ocupa el lugar de los botones.
+ * auto reparte el espacio libre en ventanas altas y permite scroll en las bajas.
+ */
+.p7d-home #footer {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding-top: 2.25rem;
+}
+
+.service-links {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0.8em;
+  max-width: 100%;
+}
+
+/* Las opciones son enlaces reales, con apariencia de botones sin relleno. */
+#header .service-links .service-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.15em;
+  padding: 0.65em 1.1em;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 9px;
+  background: transparent;
+  color: #fff !important;
+  font-size: 0.95em;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.005em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 180ms ease, border-color 180ms ease,
+    box-shadow 180ms ease, transform 180ms ease;
+}
+
+#header .service-links .service-link:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: #fff;
+  color: #fff !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.13);
+}
+
+#header .service-links .service-link:active {
+  background: rgba(255, 255, 255, 0.20);
+  transform: translateY(1px);
+}
+
+#header .service-links .service-link:focus-visible,
+#header .back-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+#header .back-link {
+  display: inline-block;
+  margin-top: 2em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  font-size: 0.85em;
+  text-decoration: none;
+}
+
+#header .back-link:hover {
+  border-bottom-color: #fff;
+  color: #fff !important;
+}
+
+/* En pantallas pequeñas, los tres accesos ocupan filas independientes. */
+@media screen and (max-width: 736px) {
+  .service-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75em;
+    width: 100%;
+    max-width: 25em;
+  }
+
+  #header .service-links .service-link {
+    width: 100%;
+    min-height: 3em;
+    padding: 0.75em 1em;
+    white-space: normal;
+  }
+
+  /* El pie queda debajo de los botones, también en móviles bajos. */
+  #footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin-top: 2.5em;
+    opacity: 0.75;
+  }
+}
+
+/* En notebooks el tamaño base ya se adapta mediante main.css.
+ * No se sobreescribe la proporción 1.65em / 1.35em en escritorio.
+ */
+
+@media screen and (max-width: 736px) {
+  .p7d-home #header {
+    margin-top: 0;
+  }
+
+  .p7d-home #header h1 {
+    margin-bottom: 0.6em;
+  }
+
+  .p7d-home #header .presentation {
+    font-size: 1.25em;
+    line-height: 1.42;
+  }
+
+  /* 24px aprox. para la frase principal y 20px para el resto. */
+  .p7d-home #header .presentation > p:first-child {
+    font-size: 1.2em;
+  }
+
+  /* Un margen moderado para las viñetas sin desperdiciar ancho móvil. */
+  .p7d-home #header .presentation ul {
+    padding-left: 1.45em;
+  }
+
+  .p7d-home .service-links {
+    margin-top: 1.2em;
+  }
+
+  .p7d-home #footer {
+    margin-top: 0;
+    padding-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .p7d-home #header .presentation {
+    font-size: 1.18em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #header .service-links .service-link {
+    transition: none;
+  }
+}
+
+
+/* Fondos alternativos para pantallas pequenas (telefonos y hasta 736 px).
+ * Eventually inserta las imagenes de escritorio mediante estilos inline JS.
+ * !important es necesario para sustituir solamente background-image;
+ * las transiciones, animaciones y el resto de la plantilla no cambian.
+ * Reemplazar images/mobile/bg01.jpg, bg02.jpg y bg03.jpg por imagenes propias.
+ */
+@media screen and (max-width: 736px) {
+  #bg > div:nth-child(1) {
+    background-image: url("../../images/mobile/bg01.jpg") !important;
+  }
+
+  #bg > div:nth-child(2) {
+    background-image: url("../../images/mobile/bg02.jpg") !important;
+  }
+
+  #bg > div:nth-child(3) {
+    background-image: url("../../images/mobile/bg03.jpg") !important;
+  }
+}
